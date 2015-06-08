@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>撒夫尔同盟</title>
-	
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <![endif]-->
+
+	<link href="bootstrap-3.3.4-dist/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="bootstrap-3.3.4-dist/js/jquery-1.8.3.min.js"></script>
-	<script src="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap-3.3.4-dist/js/jquery-2.1.1.js"></script>
+	<script src="bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+	
+	
 	<style>
 		body{
-			background:url(img/bg.jpg) no-repeat fixed center;			
+			background:rgb(199,209,240);			
 		}
 		
 		.bgimg{
@@ -23,7 +30,23 @@
 			left:0px;
 			right:0px;
 		}
+		
+		.trbg{
+			backround:rgb(255,255,255);
+			filter:alpha(opacity=10); 
+			opacity: 0.1;
+		}
+		
+		.slideDiv img{
+			height:450px !important;
+			margin:0 auto 0 auto:
+		}
 	</style>
+	<script>
+		$(function(){
+			$(".carousel").carousel();
+		});
+	</script>
   </head>
 
   <body >
@@ -31,21 +54,44 @@
 		<img src="img/bg.jpg" width="100%"/>
 	</div>
   	<div class="container">
-	  <div class="row">
-	  		 <div class="span1">
-			 </div>
-	  	 	 <div class="span11">
-				 <h1 style="color:#000066;">赢家们的主页</h1>
-				 <p style="color:#0033CC">——仅以此纪念我们万久长存的友谊</p>
-			 </div>
+		  <div class="row">
+				 <div class="span1">
+				 </div>
+				 <div class="span11">
+					 <h1 style="color:#000066;">赢家们的主页</h1>
+					 <p style="color:#0033CC">——仅以此纪念我们万久长存的友谊</p>
+				 </div>
 		  </div>
-	  </div>
-	  <div class="row">
-	  	 <div class="span12">
-		 </div>
-	  </div>
+	
+		<div>	
+			 <div calss="span2"> 
+			 </div>	
+			 <div class="span8" class="trbg">
+				<div id="photo" class="carousel slide" >
+				  <!-- Carousel items -->
+				  <div class="carousel-inner slideDiv" data-ride="carousel">
+					<div class="item " align="center" >
+						<img  src="img/misswu.jpg"/>
+					</div>
+					<div class=" item" align="center">
+						<img  src="img/aqin.jpg"/>
+					</div>
+					
+					<div class="item active" align="center">
+						<img  src="img/ganju.jpg"/>
+					</div>
+				  </div>
+				  <!-- Carousel nav -->
+				  <a class="carousel-control left" href="#photo" data-slide="prev">&lsaquo;</a>
+				  <a class="carousel-control right" href="#photo" data-slide="next">&rsaquo;</a>
+				</div>
+			  </div>
+			  <div calss="span2"> 
+			  </div>	
+		</div>
+		
+		
     </div> 
-    
-
+ 
   </body>
 </html>

@@ -37,14 +37,110 @@
 			opacity: 0.1;
 		}
 		
+		.aquo{
+			position:absolute;
+			top:46%;
+			border:rgb(240,240,240) 5px solid;
+			color:rgb(240,240,240);
+			background:rgb(20,20,20);
+			border-radius:60px;
+			height:60px;
+			width:60px;
+			font-size:45px;
+			line-height:45px;
+			left:30%;
+		}
+		
+		
 		.slideDiv img{
 			height:450px !important;
 			margin:0 auto 0 auto:
 		}
 	</style>
 	<script>
+		function slideShowDiv(divId,peri){
+			var slideShow = {};
+			var itemList = new Array();	
+			var itemCount = 0;
+			var activeIndex = 0;
+			var period = 4000;
+			var interval = null;
+			var status = 0;
+			$(divId).find(".slideItem").each(function(){
+				itemList.push(this);
+			});
+			
+			itemCount = itemList.length;
+			
+			if(peri){
+				period = peri;
+			}
+			
+			slideShow.startSlide = function(index){
+				if(index){
+					activeIndex = index;
+				}
+				itemActive(activeIndex);	
+				status = 1;
+				interval = window.setInterval(nextItem,period);		
+			};
+			
+			
+			function stopSlide(){
+				status = 0;
+				if(interval){
+					window.clearInterval(interval);
+				}
+			}
+			
+			//使指定item为激活状态
+			function itemActive(index){
+				if(index>=0 && index<itemCount){
+					$(divId).find(".slideItem").css("display","none");
+					$(itemList[index]).fadeIn();
+				}
+				
+				if(interval){
+					window.clearInterval(interval);
+				}
+				
+				if(status){
+				 	interval = window.setInterval(nextItem,period);
+				}
+			}
+			
+			//上一轮播块
+			function preItem(){
+				if(activeIndex<=0){
+					activeIndex = itemCount-1;
+				}else{
+					activeIndex = activeIndex-1;
+				}		
+				itemActive(activeIndex);
+			}
+			
+			
+			//下一轮播块
+			function nextItem(){
+				if(activeIndex>=itemCount-1){
+					activeIndex = 0;
+				}else{
+					activeIndex = activeIndex+1;
+				}		
+				itemActive(activeIndex);
+			}
+			
+			slideShow.preItem = preItem;
+			slideShow.nextItem = nextItem;
+			slideShow.itemActive = itemActive;
+			slideShow.stopSlide = stopSlide;
+			return slideShow;		
+		}
+		
+		var slideShow;
 		$(function(){
-			$(".carousel").carousel();
+			slideShow = slideShowDiv("#testPhoto",3000);
+			slideShow.startSlide();
 		});
 	</script>
   </head>
@@ -62,13 +158,14 @@
 					 <p style="color:#0033CC">——仅以此纪念我们万久长存的友谊</p>
 				 </div>
 		  </div>
-	
+		
+		<!--
 		<div>	
 			 <div calss="span2"> 
 			 </div>	
 			 <div class="span8" class="trbg">
 				<div id="photo" class="carousel slide" >
-				  <!-- Carousel items -->
+				 
 				  <div class="carousel-inner slideDiv" data-ride="carousel">
 					<div class="item " align="center" >
 						<img  src="img/misswu.jpg"/>
@@ -81,7 +178,7 @@
 						<img  src="img/ganju.jpg"/>
 					</div>
 				  </div>
-				  <!-- Carousel nav -->
+				 
 				  <a class="carousel-control left" href="#photo" data-slide="prev">&lsaquo;</a>
 				  <a class="carousel-control right" href="#photo" data-slide="next">&rsaquo;</a>
 				</div>
@@ -89,7 +186,40 @@
 			  <div calss="span2"> 
 			  </div>	
 		</div>
+		-->
 		
+		<div class="row">	
+			
+			 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" sytle="overflow:hidden;">
+				<div id="testPhoto" class="carousel slide" >
+				  <!-- Carousel items -->
+				  <div class="slideDiv" data-ride="carousel">
+					<div class="slideItem " align="center" >
+						<img  src="img/misswu.jpg"/>
+					</div>
+					<div class=" slideItem" align="center">
+						<img  src="img/aqin.jpg"/>
+					</div>
+					
+					<div class="slideItem " align="center">
+						<img  src="img/ganju.jpg"/>
+					</div>
+				  </div>
+				  <a class="carousel-control left" href="javaScript:slideShow.preItem();">
+				  	 <span class="aquo">
+				  		&lsaquo;
+				  	 </span>
+				  </a>
+				  <a class="carousel-control right" href="javaScript:slideShow.nextItem();">
+				  	<span class="aquo">
+				 		&rsaquo;
+				  	</span>
+				  </a>
+				</div>
+			  </div>
+			  <div calss="col-xs-4 col-sm-4 col-md-4 col-lg-4"> 
+			  </div>	
+		</div>
 		
     </div> 
  
